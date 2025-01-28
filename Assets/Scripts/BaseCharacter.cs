@@ -19,10 +19,23 @@ namespace LearnGame
         private float _health = 2f;
         [SerializeField]
         private float _speedMultiplier = 2f;
+        private bool _speedBoostActive = false;
 
         private IMovementDirSource _MovementDirSource;
         private CharacterMovementController _CMC;
         private ShootingController _SC;
+        public void StartSpeedBoost(float multiplier, float duration)
+        {
+            StartCoroutine(SpeedBoostRoutine(multiplier, duration));
+        }
+        private IEnumerator SpeedBoostRoutine(float multiplier, float duration)
+        {
+            _speedBoostActive = true;
+            _CMC.SetSpeedMultiplier(multiplier);
+            yield return new WaitForSeconds(duration);
+            _speedBoostActive = false;
+            _CMC.ResetSpeedMultiplier();
+        }
         protected void Awake()
         {
             _CMC = GetComponent<CharacterMovementController>();
@@ -42,10 +55,11 @@ namespace LearnGame
             _CMC.MoveDir = dir;
             _CMC.LookDir = lookDir;
 
-            if (Input.GetKey(KeyCode.Space))
-                _CMC.SetSpeedMultiplier(_speedMultiplier);
-            else
-                _CMC.ResetSpeedMultiplier();
+            if (!_speedBoostActive)
+                if (Input.GetKey(KeyCode.Space))
+                    _CMC.SetSpeedMultiplier(_speedMultiplier);
+                else
+                    _CMC.ResetSpeedMultiplier();
 
             if (_health <= 0f)
                 Destroy(gameObject);
@@ -61,7 +75,13 @@ namespace LearnGame
             else if (LayerUtils.IsPickUp(other.gameObject))
             {
                 var pickUp = other.gameObject.GetComponent<PickUpWeapon>();
-                _SC.SetWeapon(pickUp.WeaponPrefab, _hand);
+                if (pickUp)
+                    _SC.SetWeapon(pickUp.WeaponPrefab, _hand);
+
+                var pickUpSB = other.gameObject.GetComponent<PickUpSpeedBonus>();
+                if (pickUpSB)
+                    StartSpeedBoost(pickUpSB._speedMultiplier, pickUpSB._duration);
+
                 Destroy(other.gameObject);
             }
         }

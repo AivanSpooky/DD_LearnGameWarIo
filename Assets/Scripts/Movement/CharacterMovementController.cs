@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace LearnGame.Movement
 {
@@ -41,6 +40,7 @@ namespace LearnGame.Movement
             var delta = MoveDir * _speed * _curSpeedMultiplier * Time.deltaTime;
             _characterController.Move(delta);
         }
+
         public void SetSpeedMultiplier(float multiplier) => _curSpeedMultiplier = multiplier;
         public void ResetSpeedMultiplier() => _curSpeedMultiplier = 1f;
     }
