@@ -15,5 +15,11 @@ namespace LearnGame.SpawnZones
             int index = Random.Range(0, _charactersToSpawn.Length);
             return _charactersToSpawn[index];
         }
+
+        protected override void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _radius);
+        }
     }
 }

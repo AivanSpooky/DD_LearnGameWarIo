@@ -36,5 +36,11 @@ namespace LearnGame.SpawnZones
                 }
             }
         }
+
+        protected override void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, _radius);
+        }
     }
 }
