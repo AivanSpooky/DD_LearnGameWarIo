@@ -98,7 +98,8 @@ GameObject:
   - component: {fileID: 4978852014956075035}
   - component: {fileID: 1467073794011610830}
   - component: {fileID: 912031549183564754}
-  - component: {fileID: 249511839947446937}
+  - component: {fileID: 4940179821216696800}
+  - component: {fileID: 5305409952404113726}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -194,8 +195,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 15
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -211,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0d88f4b1bcb3a44b5b52d76d75e36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 2
   _maxRadDelta: 10
 --- !u!114 &1467073794011610830
 MonoBehaviour:
@@ -243,7 +244,8 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 3993156333506032169, guid: a4fdcdbfcf6281541a164b48fd0a9eaa, type: 3}
   _hand: {fileID: 8001201620837067141}
   _health: 5
---- !u!114 &249511839947446937
+  _speedMultiplier: 2
+--- !u!114 &4940179821216696800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,9 +254,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2420545831680847866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990fc28d56285b0498e030e74d73ad71, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fdda5b5f7f1e2a46a8e9847ef5a7e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5305409952404113726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2420545831680847866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a774c392fd3099438518771ee73f10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _viewRadius: 50
 --- !u!1 &6787566874680510985
 GameObject:
   m_ObjectHideFlags: 0
