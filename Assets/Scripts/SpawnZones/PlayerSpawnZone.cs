@@ -8,6 +8,8 @@ namespace LearnGame.SpawnZones
         [SerializeField]
         private GameObject _playerPrefab;
 
+        private static bool s_playerSpawned = false;
+
         public static event Action<PlayerCharacter> OnPlayerSpawned;
 
         protected override GameObject GetPrefabToSpawn()
@@ -18,6 +20,9 @@ namespace LearnGame.SpawnZones
 
         protected override void SpawnItem()
         {
+            if (s_playerSpawned)
+                return;
+
             base.SpawnItem();
 
             if (_spawnedItems.Count > 0)
@@ -25,7 +30,10 @@ namespace LearnGame.SpawnZones
                 GameObject newest = _spawnedItems[^1];
                 var playerComp = newest.GetComponent<PlayerCharacter>();
                 if (playerComp != null)
+                {
                     OnPlayerSpawned?.Invoke(playerComp);
+                    s_playerSpawned = true;
+                }
             }
         }
     }

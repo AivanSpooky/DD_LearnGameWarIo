@@ -47,6 +47,6 @@ MonoBehaviour:
   _radius: 2
   _yOffset: 1
   _maxItemsInZone: 1
-  _spawnTimeMin: 0
-  _spawnTimeMax: 0
+  _spawnTimeMin: 0.2
+  _spawnTimeMax: 0.5
   _playerPrefab: {fileID: 1562383261858538012, guid: ec6cdfb8563255644a094b165cf0f79a, type: 3}
