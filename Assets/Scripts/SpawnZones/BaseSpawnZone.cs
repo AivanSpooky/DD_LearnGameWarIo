@@ -1,31 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace LearnGame
+namespace LearnGame.SpawnZones
 {
-    public class SpawnZone : MonoBehaviour
+    public abstract class BaseSpawnZone : MonoBehaviour
     {
         [SerializeField]
-        private float _radius = 5f;
+        protected float _radius = 5f;
         [SerializeField]
-        private GameObject _pickUpPrefab;
+        protected float _yOffset = 1f;
         [SerializeField]
-        private float _yOffset = 1f;
+        protected int _maxItemsInZone = 3;
         [SerializeField]
-        private int _maxItemsInZone = 3;
+        protected float _spawnTimeMin = 3f;
         [SerializeField]
-        private float _spawnTimeMin = 3f;
-        [SerializeField]
-        private float _spawnTimeMax = 7f;
+        protected float _spawnTimeMax = 7f;
 
-        private int _currentItemCount;
-        private float _nextSpawnTimer;
-        private readonly List<GameObject> _spawnedItems = new List<GameObject>();
-        protected void Start()
+
+        protected int _currentItemCount;
+        protected float _nextSpawnTimer;
+        protected List<GameObject> _spawnedItems = new List<GameObject>();
+
+        protected abstract GameObject GetPrefabToSpawn();
+
+        protected virtual void Start()
         {
             _nextSpawnTimer = Random.Range(_spawnTimeMin, _spawnTimeMax);
         }
-        protected void Update()
+
+        protected virtual void Update()
         {
             if (_currentItemCount < _maxItemsInZone)
             {
@@ -37,8 +41,12 @@ namespace LearnGame
                 }
             }
         }
-        private void SpawnItem()
+
+        protected virtual void SpawnItem()
         {
+            var prefabToSpawn = GetPrefabToSpawn();
+            if (!prefabToSpawn) return;
+
             Vector2 randomPos2D = Random.insideUnitCircle * _radius;
             Vector3 spawnPos = new Vector3(
                 transform.position.x + randomPos2D.x,
@@ -46,18 +54,21 @@ namespace LearnGame
                 transform.position.z + randomPos2D.y
             );
 
-            GameObject newItem = Instantiate(_pickUpPrefab, spawnPos, Quaternion.identity);
+            GameObject newItem = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+
             newItem.GetComponent<SpawnZoneItem>()?.Init(this);
+
             _currentItemCount++;
             _spawnedItems.Add(newItem);
         }
 
-        public void OnItemDestroyed(GameObject item)
+        public virtual void OnItemDestroyed(GameObject item)
         {
             if (_spawnedItems.Remove(item))
                 _currentItemCount--;
         }
-        private void OnDrawGizmos()
+
+        protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, _radius);

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5247021110857752887
+--- !u!1 &4510533900800416048
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8832174596697306412}
-  - component: {fileID: 8575051706777820310}
+  - component: {fileID: 7028465935094647795}
+  - component: {fileID: 7653391129025528705}
   m_Layer: 0
-  m_Name: SpawnZone
+  m_Name: EnemySpawnZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8832174596697306412
+--- !u!4 &7028465935094647795
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5247021110857752887}
+  m_GameObject: {fileID: 4510533900800416048}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.65, y: -4.357388, z: 5.829447}
+  m_LocalPosition: {x: 2.8, y: -3.739458, z: -4.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8575051706777820310
+--- !u!114 &7653391129025528705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5247021110857752887}
+  m_GameObject: {fileID: 4510533900800416048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e756544a5af6b5146907ee7a93888ee0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c0f44d649d37bf42bb123631e026c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 7
-  _pickUpPrefab: {fileID: 1565123995986058804, guid: 72c96b03c7ae8b04bba76caaeef7e06e, type: 3}
+  _radius: 5
   _yOffset: 1
-  _maxItemsInZone: 3
-  _spawnTimeMin: 3
-  _spawnTimeMax: 7
+  _maxItemsInZone: 2
+  _spawnTimeMin: 2
+  _spawnTimeMax: 5
+  _charactersToSpawn:
+  - {fileID: 2420545831680847866, guid: def39bc272dbd66499f657ad31139333, type: 3}

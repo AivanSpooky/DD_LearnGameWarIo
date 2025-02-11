@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8297689323383784402}
   - component: {fileID: 8907827348476776193}
   - component: {fileID: 6024383319673616391}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: SpeedBonusPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,8 +80,7 @@ GameObject:
   - component: {fileID: 4837881219831737397}
   - component: {fileID: 2950959667090462992}
   - component: {fileID: 8090820638449840056}
-  - component: {fileID: 5126935904473792231}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,24 +152,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5126935904473792231
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7193331556343614540}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

@@ -131,6 +131,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 3993156333506032169, guid: a4fdcdbfcf6281541a164b48fd0a9eaa, type: 3}
   _hand: {fileID: 2786946013842910279}
   _health: 2
+  _speedMultiplier: 2
 --- !u!143 &7771032363056635585
 CharacterController:
   m_ObjectHideFlags: 0
@@ -152,8 +153,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 15
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

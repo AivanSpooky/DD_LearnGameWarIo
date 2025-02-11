@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using LearnGame.SpawnZones;
+using UnityEngine;
 
 namespace LearnGame
 {
     public class SpawnZoneItem : MonoBehaviour
     {
-        private SpawnZone _zone;
-        public void Init(SpawnZone zone)
+        private BaseSpawnZone _zone;
+        public void Init(BaseSpawnZone zone)
         {
             _zone = zone;
         }
+
         private void OnDestroy()
         {
             if (_zone)

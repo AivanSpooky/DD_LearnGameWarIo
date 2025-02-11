@@ -8,15 +8,31 @@ namespace LearnGame.Camera
         [SerializeField]
         private Vector3 _followCamOffset = Vector3.zero;
         [SerializeField]
-        private Vector3 _rotationOffset = Vector3.zero; 
-        [SerializeField]
+        private Vector3 _rotationOffset = Vector3.zero;
+
         private PlayerCharacter _player;
+
+        protected void OnEnable()
+        {
+            SpawnZones.PlayerSpawnZone.OnPlayerSpawned += HandlePlayerSpawned;
+        }
+        protected void OnDisable()
+        {
+            SpawnZones.PlayerSpawnZone.OnPlayerSpawned -= HandlePlayerSpawned;
+        }
+
+        private void HandlePlayerSpawned(PlayerCharacter player)
+        {
+            _player = player;
+        }
+
         protected void Awake()
         {
             LayerUtils.BulletLay = LayerMask.NameToLayer(LayerUtils.BulletLayName);
-            if (!_player)
-                throw new NullReferenceException($"Cam can't follow null player {nameof(_player)}");
+            //if (!_player)
+            //    throw new NullReferenceException($"Cam can't follow null player {nameof(_player)}");
         }
+
         protected void LateUpdate()
         {
             if (_player)

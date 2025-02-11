@@ -1,10 +1,8 @@
-using Assets.Scripts.Movement;
-using LearnGame.Movement;
 using UnityEngine;
 
-namespace LearnGame
+namespace LearnGame.Enemy
 {
-    [RequireComponent(typeof(DummyDirController))]
+    [RequireComponent(typeof(EnemyDirController), typeof(EnemyAiController))]
     public class EnemyCharacter : BaseCharacter
     {
         

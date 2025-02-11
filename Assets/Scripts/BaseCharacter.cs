@@ -15,37 +15,50 @@ namespace LearnGame
         private Weapon WeaponPrefab;
         [SerializeField]
         private Transform _hand;
+        public bool HasDefaultWeapon { get; private set; } = true;
+
         [SerializeField]
-        private float _health = 2f;
+        private float _maxHealth = 2f;
+        public float MaxHealth => _maxHealth;
+        private float _currentHealth;
+        public float CurrentHealth => _currentHealth;
+
         [SerializeField]
         private float _speedMultiplier = 2f;
-        private bool _speedBoostActive = false;
+        public bool SpeedBoostActive { get; private set; } = false;
 
         private IMovementDirSource _MovementDirSource;
         private CharacterMovementController _CMC;
         private ShootingController _SC;
+
         public void StartSpeedBoost(float multiplier, float duration)
         {
             StartCoroutine(SpeedBoostRoutine(multiplier, duration));
         }
+
         private IEnumerator SpeedBoostRoutine(float multiplier, float duration)
         {
-            _speedBoostActive = true;
+            SpeedBoostActive = true;
             _CMC.SetSpeedMultiplier(multiplier);
             yield return new WaitForSeconds(duration);
-            _speedBoostActive = false;
+            SpeedBoostActive = false;
             _CMC.ResetSpeedMultiplier();
         }
+
         protected void Awake()
         {
             _CMC = GetComponent<CharacterMovementController>();
             _MovementDirSource = GetComponent<IMovementDirSource>();
             _SC = GetComponent<ShootingController>();
+
+            _currentHealth = _maxHealth;
         }
+
         protected void Start()
         {
             _SC.SetWeapon(WeaponPrefab, _hand);
         }
+
         protected void Update()
         {
             var dir = _MovementDirSource.MoveDir;
@@ -55,28 +68,32 @@ namespace LearnGame
             _CMC.MoveDir = dir;
             _CMC.LookDir = lookDir;
 
-            if (!_speedBoostActive)
+            if (!SpeedBoostActive)
                 if (Input.GetKey(KeyCode.Space))
                     _CMC.SetSpeedMultiplier(_speedMultiplier);
                 else
                     _CMC.ResetSpeedMultiplier();
 
-            if (_health <= 0f)
+            if (_currentHealth <= 0f)
                 Destroy(gameObject);
         }
+
         protected void OnTriggerEnter(Collider other)
         {
             if (LayerUtils.IsBullet(other.gameObject))
             {
                 var bullet = other.gameObject.GetComponent<Bullet>();
-                _health -= bullet.Damage;
+                _currentHealth -= bullet.Damage;
                 Destroy(other.gameObject);
             }
             else if (LayerUtils.IsPickUp(other.gameObject))
             {
                 var pickUp = other.gameObject.GetComponent<PickUpWeapon>();
                 if (pickUp)
+                {
                     _SC.SetWeapon(pickUp.WeaponPrefab, _hand);
+                    HasDefaultWeapon = false;
+                }
 
                 var pickUpSB = other.gameObject.GetComponent<PickUpSpeedBonus>();
                 if (pickUpSB)
