@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 7
-  _pickUpPrefab: {fileID: 1565123995986058804, guid: 72c96b03c7ae8b04bba76caaeef7e06e, type: 3}
-  _yOffset: 1
+  _yOffset: 2
   _maxItemsInZone: 3
   _spawnTimeMin: 3
   _spawnTimeMax: 7
+  _pickUpPrefab: {fileID: 1565123995986058804, guid: 72c96b03c7ae8b04bba76caaeef7e06e, type: 3}

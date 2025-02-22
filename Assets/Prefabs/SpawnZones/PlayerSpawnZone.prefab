@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 2
-  _yOffset: 1
+  _yOffset: 0.33
   _maxItemsInZone: 1
   _spawnTimeMin: 0.2
   _spawnTimeMax: 0.5
