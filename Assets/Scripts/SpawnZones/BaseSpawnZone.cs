@@ -9,7 +9,7 @@ namespace LearnGame.SpawnZones
         [SerializeField]
         protected float _radius = 5f;
         [SerializeField]
-        protected float _yOffset = 1f;
+        protected float _yOffset = 2f;
         [SerializeField]
         protected int _maxItemsInZone = 3;
         [SerializeField]

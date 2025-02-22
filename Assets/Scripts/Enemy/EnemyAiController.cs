@@ -11,7 +11,20 @@ namespace LearnGame.Enemy
         private EnemyTarget _target;
         private EnemyStateMachine _stateMachine;
 
-        // Use this for initialization
+        public void ResetTargetIfDead(BaseCharacter character)
+        {
+            if (_target.Closest == character.gameObject)
+            {
+                _target.ResetTarget();
+                _target.FindClosest();
+
+                if (_target.Closest == null)
+                {
+                    Debug.LogWarning($"Враг {gameObject.name} потерял цель!");
+                }
+            }
+        }
+
         protected void Awake()
         {
             var player = FindObjectOfType<PlayerCharacter>();
@@ -24,8 +37,7 @@ namespace LearnGame.Enemy
             _stateMachine = new EnemyStateMachine(enemyDirController, navMesher, _target, selfCharacter);
         }
 
-        // Update is called once per frame
-        protected void Update()
+        public void Update()
         {
             _target.FindClosest();
             _stateMachine.Update();

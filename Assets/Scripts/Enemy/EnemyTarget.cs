@@ -11,16 +11,9 @@ namespace LearnGame.Enemy
         private readonly PlayerCharacter _player;
         private readonly EnemyCharacter _agentCharacter;
 
-        //public float Health
-        //{
-        //    get
-        //    {
-        //        var baseCharacter = Closest ? Closest.GetComponent<BaseCharacter>() : null;
-        //        return baseCharacter ? baseCharacter.CurrentHealth : 0f;
-        //    }
-        //}
+        public void ResetTarget() => Closest = null;
 
-        private readonly Collider[] _colliders = new Collider[10];
+        private Collider[] _colliders = new Collider[10];
 
         public EnemyTarget(Transform agent, PlayerCharacter player, float viewRadius,
             EnemyCharacter agentCharacter)
@@ -34,7 +27,7 @@ namespace LearnGame.Enemy
         public void FindClosest()
         {
             float minDistance = float.MaxValue;
-            Closest = null;
+            ResetTarget();
 
             int finalMask = 0;
             if (!_agentCharacter.SpeedBoostActive)
@@ -50,6 +43,9 @@ namespace LearnGame.Enemy
                 var go = _colliders[i].gameObject;
                 if (go == _agentTransform.gameObject) continue;
 
+                var player = go.GetComponent<PlayerCharacter>();
+                if (player != null && player.Dying) continue;
+
                 var distance = DistanceFromAgentTo(go);
                 if (distance < minDistance)
                 {
@@ -58,7 +54,7 @@ namespace LearnGame.Enemy
                 }
             }
 
-            if (_player && DistanceFromAgentTo(_player.gameObject) < minDistance)
+            if (_player && !_player.Dying && DistanceFromAgentTo(_player.gameObject) < minDistance)
                 Closest = _player.gameObject;
         }
 

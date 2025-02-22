@@ -43,7 +43,8 @@ namespace LearnGame.Shooting
             {
                 for (int i = 0; i < size; i++)
                 {
-                    if (_colliders[i].gameObject != gameObject)
+                    BaseCharacter character = _colliders[i].gameObject.GetComponent<BaseCharacter>();
+                    if (_colliders[i].gameObject != gameObject && character && !character.Dying)
                     {
                         target = _colliders[i].gameObject;
                         break;
